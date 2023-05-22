@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ItemMapper">
+	<!-- findAll -->
+	<select id="findAll" resultType="com.example.domain.Item">
+		SELECT
+		item_id
+		,name
+		,condition
+		,category_id
+		,brand
+		,price
+		,shipping
+		,description
+		FROM items
+		ORDER BY
+		item_id
+		LIMIT 30 OFFSET #{offset}
+	</select>
+	<!-- countItem -->
+	<select id="countItems" resultType="Integer">
+		SELECT
+		COUNT(*)
+		FROM
+		items
+	</select>
+	<!-- findByForm -->
+	<select id="findByForm" resultType="com.example.domain.Item">
+		SELECT
+		item_id
+		,name
+		,condition
+		,category_id
+		,brand
+		,price
+		,shipping
+		,description
+		FROM items
+		WHERE name ILIKE CONCAT('%', #{name}, '%') AND
+		brand ILIKE CONCAT('%', #{brand}, '%')
+		<if test="id != null">
+			AND
+			category_id IN (
+			SELECT
+			child_id
+			FROM
+			treepaths
+			WHERE
+			parent_id = #{id}
+			)
+		</if>
+		ORDER BY item_id
+		LIMIT 30 OFFSET #{offset}
+	</select>
+	<!-- countByForm -->
+	<select id="countByForm" resultType="Integer">
+		SELECT COUNT(*)
+		FROM items
+		WHERE name ILIKE CONCAT('%', #{name}, '%')
+		AND brand ILIKE CONCAT('%', #{brand}, '%')
+		<if test="id != null">
+			AND
+			category_id IN (
+			SELECT
+			child_id
+			FROM
+			treepaths
+			WHERE
+			parent_id = 1
+			)
+		</if>
+	</select>
+	<!-- load -->
+	<select id="load" resultType="com.example.domain.Item">
+		SELECT
+		item_id
+		,name
+		,condition
+		,category_id
+		,brand
+		,price
+		,shipping
+		,description
+		FROM items
+		WHERE
+		item_id =
+		#{itemId}
+	</select>
+	<!-- insert -->
+	<insert id="insertItem">
+		INSERT INTO
+		items(item_id,name,condition,category_id,brand,price,shipping,description)
+		VALUES(#{item.itemId},#{item.name},#{item.condition},#{item.categoryId},#{item.brand},#{item.price},#{item.shipping},#{item.description})
+	</insert>
+	<!-- update -->
+	<update id="updateItem">
+		UPDATE items SET name = #{item.name},condition =
+		#{item.condition},category_id = #{item.categoryId}
+		,brand = #{item.brand},price = #{item.price},shipping =
+		#{item.shipping},description = #{item.description}
+		WHERE item_id = #{item.itemId}
+	</update>
+	<!-- checkItemId -->
+	<select id="checkItemId">
+		SELECT MAX(item_id) from items
+	</select>
+	<!-- createIndexForItemId -->
+	<sql id="createIndexForItemId">
+		CREATE UNIQUE INDEX idx_item_id ON items(item_id)
+	</sql>
+	<!-- deleteIndexForItemId -->
+	<delete id="deleteIndexForItemId">
+		DELETE INDEX IF EXISTS idx_item_id
+	</delete>
+
+</mapper>
