@@ -7,5 +7,7 @@ spring:
 server:
   servlet:
     context-path: /ec-bigdata
-
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
 

@@ -21,6 +21,7 @@ public class PickUpCategoryService {
 	@Autowired
 	CategoryRepository categoryRepository;
 
+
 	/**
 	 * 親idと階層に紐付くカテゴリ情報を取得する.
 	 * 

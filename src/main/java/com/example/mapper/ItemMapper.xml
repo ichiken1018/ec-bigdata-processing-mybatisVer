@@ -24,6 +24,10 @@
 		FROM
 		items
 	</select>
+	<!-- count処理 limit-->
+	<!-- count処理　offset -->
+	
+		
 	<!-- findByForm -->
 	<select id="findByForm" resultType="com.example.domain.Item">
 		SELECT
@@ -110,7 +114,7 @@
 	</sql>
 	<!-- deleteIndexForItemId -->
 	<delete id="deleteIndexForItemId">
-		DELETE INDEX IF EXISTS idx_item_id
+		DROP INDEX IF EXISTS idx_item_id
 	</delete>
 
 </mapper>

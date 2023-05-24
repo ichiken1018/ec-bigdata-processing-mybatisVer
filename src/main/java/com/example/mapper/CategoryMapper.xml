@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CategoryMapper">
+
+	<!-- findByDepth -->
+	<select id="findByDepth"
+		resultType="com.example.domain.Category">
+		SELECT
+		category_id
+		,name
+		,depth
+		FROM categories
+		WHERE depth = #{depth}
+		ORDER BY name
+	</select>
+
+	<!-- findByParentIdAndDepth -->
+	<select id="findByParentIdAndDepth"
+		resultType="com.example.domain.Category">
+		SELECT 
+		category_id
+		,name
+		,depth
+		FROM categories c
+		WHERE
+		depth = #{depth}
+		AND
+		category_id IN (
+		SELECT child_id FROM treepaths
+		WHERE parent_id = #{parentId}
+		)
+		ORDER BY name
+	</select>
+
+	<!-- findByChildId -->
+	<select id="findByChildId"
+		resultType="com.example.domain.Category">
+		SELECT 
+		category_id
+		,name
+		,depth
+		FROM categories
+		WHERE category_id IN(
+		SELECT parent_id FROM treepaths
+		WHERE
+		child_id = #{childId}
+		) 
+		ORDER BY depth
+	</select>
+</mapper>

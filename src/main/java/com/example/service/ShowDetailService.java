@@ -10,7 +10,6 @@ import com.example.domain.Category;
 import com.example.domain.Item;
 import com.example.mapper.ItemMapper;
 import com.example.repository.CategoryRepository;
-import com.example.repository.ItemRepository;
 
 /**
  * 商品詳細を操作するサービス.
@@ -23,12 +22,9 @@ import com.example.repository.ItemRepository;
 public class ShowDetailService {
 
 	@Autowired
-	private ItemRepository itemRepository;
+	private ItemMapper itemMapper;
 	@Autowired
 	private CategoryRepository categoryRepository;
-	@Autowired
-	private ItemMapper itemMapper;
-
 	/**
 	 * 詳細画面を表示する.
 	 * 

@@ -10,7 +10,6 @@ import com.example.domain.Item;
 import com.example.form.ItemForm;
 import com.example.mapper.ItemMapper;
 import com.example.repository.CategoryRepository;
-import com.example.repository.ItemRepository;
 
 /**
  * 商品追加を操作するサービス.
@@ -20,13 +19,11 @@ import com.example.repository.ItemRepository;
  */
 @Service
 public class AddItemService {
-
-	@Autowired
-	private ItemRepository itemRepository;
-	@Autowired
-	private CategoryRepository categoryRepository;
+	
 	@Autowired
 	private ItemMapper itemMapper;
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	/**
 	 * 階層に紐付くカテゴリを取得する.
@@ -95,7 +92,7 @@ public class AddItemService {
 		item.setShipping(0); // shippingを一旦0で設定.
 		item.setDescription(form.getDescription());
 		item.setCategoryId(Integer.parseInt(form.getGrandChildId()));
-		Integer itemId = itemRepository.checkItemId();
+		Integer itemId = itemMapper.checkItemId();
 		itemId++;
 		item.setItemId(itemId);
 		return item;

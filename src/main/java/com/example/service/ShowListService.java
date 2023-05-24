@@ -11,7 +11,6 @@ import com.example.domain.Item;
 import com.example.form.SearchItemForm;
 import com.example.mapper.ItemMapper;
 import com.example.repository.CategoryRepository;
-import com.example.repository.ItemRepository;
 
 /**
  * 商品一覧表示を操作するサービス.
@@ -22,12 +21,11 @@ import com.example.repository.ItemRepository;
 @Service
 @Transactional
 public class ShowListService {
-	@Autowired
-	private ItemRepository itemRepository;
-	@Autowired
-	private CategoryRepository categoryRepository;
+
 	@Autowired
 	private ItemMapper itemMapper;
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	/**
 	 * 商品一覧を表示する

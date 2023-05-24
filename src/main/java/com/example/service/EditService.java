@@ -11,7 +11,6 @@ import com.example.domain.Item;
 import com.example.form.ItemForm;
 import com.example.mapper.ItemMapper;
 import com.example.repository.CategoryRepository;
-import com.example.repository.ItemRepository;
 
 /**
  * 商品編集を操作するサービス.
@@ -22,12 +21,11 @@ import com.example.repository.ItemRepository;
 @Service
 @Transactional
 public class EditService {
-	@Autowired
-	private ItemRepository itemRepository;
-	@Autowired
-	private CategoryRepository categoryRepository;
+
 	@Autowired
 	private ItemMapper itemMapper;
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	/**
 	 * 主キー検索する
