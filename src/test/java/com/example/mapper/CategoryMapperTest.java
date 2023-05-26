@@ -41,10 +41,10 @@ class CategoryMapperTest {
 	void testFindByDepth() {
 		Integer depth = 0;
 		List<Category>categoryList = mapper.findByDepth(depth);
-		for(Category category : categoryList) {
+//		for(Category category : categoryList) {
 //			System.out.println("findByDepth:" + category.getName());
 //			System.out.println("id:" + category.getId() );
-		}
+//		}
 		assertEquals(11,categoryList.size(),"検索結果が異なります");
 	}
 

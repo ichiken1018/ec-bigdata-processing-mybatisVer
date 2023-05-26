@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.User;
-import com.example.repository.UserRepository;
+import com.example.mapper.UserMapper;
 
 /**
  * ログイン処理を行うサービス.
@@ -18,18 +18,17 @@ import com.example.repository.UserRepository;
 public class LoginService {
 
 	@Autowired
-	UserRepository repository;
-	
-	
+	UserMapper userMapper;
+
 	/**
 	 * ログインする.
 	 * 
 	 * @param mailAddress メールアドレス
-	 * @param password　パスワード
-	 * @return　ログイン者情報
+	 * @param password    パスワード
+	 * @return ログイン者情報
 	 */
-	public User login(String mailAddress,String password) {
-		User user = repository.findByMailAddressAndPassword(mailAddress, password);
+	public User login(String mailAddress, String password) {
+		User user = userMapper.findByMailAddressAndPassword(mailAddress, password);
 		return user;
 	}
 }

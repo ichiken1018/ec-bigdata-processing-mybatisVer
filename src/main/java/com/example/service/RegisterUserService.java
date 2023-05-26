@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.User;
-import com.example.repository.UserRepository;
+import com.example.mapper.UserMapper;
 
 /**
  * ユーザー登録を操作するサービス.
@@ -18,14 +18,14 @@ import com.example.repository.UserRepository;
 public class RegisterUserService {
 
 	@Autowired
-	UserRepository repository;
-	
+	UserMapper userMapper;
+
 	/**
 	 * ユーザー登録をする.
 	 * 
 	 * @param user ユーザー情報
 	 */
 	public void registerUser(User user) {
-		repository.insert(user);
+		userMapper.insert(user);
 	}
 }
