@@ -105,16 +105,16 @@
 		WHERE item_id = #{item.itemId}
 	</update>
 	<!-- checkItemId -->
-	<select id="checkItemId">
+	<select id="checkItemId" resultType="Integer">
 		SELECT MAX(item_id) from items
 	</select>
 	<!-- createIndexForItemId -->
-	<sql id="createIndexForItemId">
+	<select id="createIndexForItemId">
 		CREATE UNIQUE INDEX idx_item_id ON items(item_id)
-	</sql>
+	</select>
 	<!-- deleteIndexForItemId -->
-	<delete id="deleteIndexForItemId">
+	<select id="deleteIndexForItemId">
 		DROP INDEX IF EXISTS idx_item_id
-	</delete>
+	</select>
 
 </mapper>

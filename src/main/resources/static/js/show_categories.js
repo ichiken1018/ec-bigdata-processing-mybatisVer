@@ -4,7 +4,7 @@ $(function () {
   // 親カテゴリが変更されたら実行
   $("#parent-id").on("change", function () {
     const parentId = $("#parent-id").val();
-	//console.log("parentId" + parentId);
+	console.log("parentId:" + parentId);
     if (parentId == -1) {
       $("#child-id").hide();
       $("#grand-child-id").hide();
@@ -24,7 +24,6 @@ $(function () {
       .done(function (data) {
         //成功
         const childCategoryList = data.childCategoryList;
-        
         if (childCategoryList.length == 0) {
           $("#child-id").hide();
           $("#grand-child-id").hide();
@@ -61,7 +60,7 @@ $(function () {
   // 子カテゴリが変更されたら実行
   $("#child-id").on("change", function () {
     const childId = $("#child-id").val();
-
+	console.log("childId:" + childId);
     if (childId == -1) {
       $("#grand-child-id").hide();
       return;

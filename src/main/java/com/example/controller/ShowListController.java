@@ -54,7 +54,7 @@ public class ShowListController {
 		}
 
 		// ページ数の遷移の処理
-		Integer totalPage = totalItems / 30 + 1;
+		Integer totalPage = totalItems / 30 + 1; //端数のページ考慮のため1足す.
 		model.addAttribute("totalPage", totalPage);
 		page = checkPage(page, totalPage);
 		session.setAttribute("page", page);
@@ -88,7 +88,12 @@ public class ShowListController {
 			}
 		}
 		model.addAttribute("itemList", itemList);
+		//親カテゴリの処理　フォームに関わらず処理が必要
 		List<Category> parentCategoryList = showListService.pickUpCategoryListByDepth(0);
+//		for(Category category:parentCategoryList) {
+//			System.out.println("list:" + category.getName());
+//			System.out.println("list:" + category.getId());
+//		}
 		model.addAttribute("parentCategoryList", parentCategoryList);
 
 		return "list";

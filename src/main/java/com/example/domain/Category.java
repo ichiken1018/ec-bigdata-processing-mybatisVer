@@ -8,7 +8,7 @@ package com.example.domain;
  */
 public class Category {
 	/** カテゴリID */
-	private Integer id;
+	private Integer categoryId;
 	/** 階層の深さ */
 	private Integer depth;
 	/** カテゴリ名 nameAll 〇/〇/〇を1つずつ取得したもの */
@@ -20,17 +20,17 @@ public class Category {
 
 	public Category(Integer id, Integer depth, String name) {
 		super();
-		this.id = id;
+		this.categoryId = id;
 		this.depth = depth;
 		this.name = name;
 	}
 
 	public Integer getId() {
-		return id;
+		return categoryId;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.categoryId = id;
 	}
 
 	public Integer getDepth() {
@@ -51,7 +51,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", depth=" + depth + ", name=" + name + "]";
+		return "Category [id=" + categoryId + ", depth=" + depth + ", name=" + name + "]";
 	}
 
 }

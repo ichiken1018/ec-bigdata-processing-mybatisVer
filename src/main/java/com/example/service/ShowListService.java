@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.domain.Category;
 import com.example.domain.Item;
 import com.example.form.SearchItemForm;
+import com.example.mapper.CategoryMapper;
 import com.example.mapper.ItemMapper;
-import com.example.repository.CategoryRepository;
 
 /**
  * 商品一覧表示を操作するサービス.
@@ -25,7 +25,7 @@ public class ShowListService {
 	@Autowired
 	private ItemMapper itemMapper;
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private CategoryMapper categoryMapper;
 
 	/**
 	 * 商品一覧を表示する
@@ -57,7 +57,7 @@ public class ShowListService {
 	 * @return 検索されたカテゴリ情報
 	 */
 	public List<Category> pickUpCategoryListByDepth(Integer depth) {
-		List<Category> categoryList = categoryRepository.findByDepth(depth);
+		List<Category> categoryList = categoryMapper.findByDepth(depth);
 		if (categoryList.size() == 0) {
 			throw new RuntimeException("categoriesテーブルに該当カテゴリが存在しません。");
 		}
@@ -71,7 +71,7 @@ public class ShowListService {
 	 * @return 検索されたカテゴリ情報
 	 */
 	public List<Category> pickUpCategoryListByChildId(Integer childId) {
-		List<Category> categoryList = categoryRepository.findByChildId(childId);
+		List<Category> categoryList = categoryMapper.findByChildId(childId);
 		return categoryList;
 	}
 
@@ -83,7 +83,7 @@ public class ShowListService {
 	 * @return 検索されたカテゴリ情報
 	 */
 	public List<Category> pickUpCategoryListByParentIdAndDepth(Integer parentId, Integer depth) {
-		List<Category> categoryList = categoryRepository.findByParentIdAndDepth(parentId, depth);
+		List<Category> categoryList = categoryMapper.findByParentIdAndDepth(parentId, depth);
 		return categoryList;
 	}
 
@@ -143,7 +143,7 @@ public class ShowListService {
 	public List<Item> setCategoryList(List<Item> itemList) {
 		for (Item item : itemList) {
 			Integer categoryId = item.getCategoryId();
-			List<Category> categoryList = categoryRepository.findByChildId(categoryId);
+			List<Category> categoryList = categoryMapper.findByChildId(categoryId);
 			item.setCategoryList(categoryList);
 		}
 		return itemList;

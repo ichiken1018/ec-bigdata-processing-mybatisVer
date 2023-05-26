@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.Category;
 import com.example.domain.Item;
+import com.example.mapper.CategoryMapper;
 import com.example.mapper.ItemMapper;
-import com.example.repository.CategoryRepository;
 
 /**
  * 商品詳細を操作するサービス.
@@ -24,7 +24,7 @@ public class ShowDetailService {
 	@Autowired
 	private ItemMapper itemMapper;
 	@Autowired
-	private CategoryRepository categoryRepository;
+	private CategoryMapper categoryMapper;
 	/**
 	 * 詳細画面を表示する.
 	 * 
@@ -33,7 +33,7 @@ public class ShowDetailService {
 	 */
 	public Item showItemDetail(Integer itemId) {
 		Item item = itemMapper.load(itemId);
-		List<Category> categoryList = categoryRepository.findByChildId(item.getCategoryId());
+		List<Category> categoryList = categoryMapper.findByChildId(item.getCategoryId());
 		item.setCategoryList(categoryList);
 		String nameAll = null;
 		for (int i = 0; i < categoryList.size(); i++) {

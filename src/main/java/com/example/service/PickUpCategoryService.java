@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.Category;
-import com.example.repository.CategoryRepository;
+import com.example.mapper.CategoryMapper;
 
 /**
  * カテゴリのDOM操作用のサービス.
@@ -19,8 +19,7 @@ import com.example.repository.CategoryRepository;
 @Transactional
 public class PickUpCategoryService {
 	@Autowired
-	CategoryRepository categoryRepository;
-
+	private CategoryMapper categoryMapper;
 
 	/**
 	 * 親idと階層に紐付くカテゴリ情報を取得する.
@@ -31,7 +30,7 @@ public class PickUpCategoryService {
 	 */
 	public List<Category> pickUpCategoryListByParentIdAndDepth(Integer parentId, Integer depth) {
 
-		return categoryRepository.findByParentIdAndDepth(parentId, depth);
+		return categoryMapper.findByParentIdAndDepth(parentId, depth);
 	}
 
 }

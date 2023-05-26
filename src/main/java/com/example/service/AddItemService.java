@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.domain.Category;
 import com.example.domain.Item;
 import com.example.form.ItemForm;
+import com.example.mapper.CategoryMapper;
 import com.example.mapper.ItemMapper;
-import com.example.repository.CategoryRepository;
 
 /**
  * 商品追加を操作するサービス.
@@ -22,9 +22,10 @@ public class AddItemService {
 	
 	@Autowired
 	private ItemMapper itemMapper;
+
 	@Autowired
-	private CategoryRepository categoryRepository;
-	
+	private CategoryMapper categoryMapper;
+
 	/**
 	 * 階層に紐付くカテゴリを取得する.
 	 * 
@@ -32,7 +33,7 @@ public class AddItemService {
 	 * @return 検索されたカテゴリ情報
 	 */
 	public List<Category> pickUpCategoryListByDepth(Integer depth) {
-		List<Category> categoryList = categoryRepository.findByDepth(depth);
+		List<Category> categoryList = categoryMapper.findByDepth(depth);
 
 		for (int i = 0; i < categoryList.size(); i++) {
 			if ("".equals(categoryList.get(i).getName())) {
@@ -52,7 +53,7 @@ public class AddItemService {
 	 * @return 検索されたカテゴリ情報
 	 */
 	public List<Category> pickUpCategoryListByParentIdAndDepth(Integer parentId, Integer depth) {
-		List<Category> categoryList = categoryRepository.findByParentIdAndDepth(parentId, depth);
+		List<Category> categoryList = categoryMapper.findByParentIdAndDepth(parentId, depth);
 
 		for (int i = 0; i < categoryList.size(); i++) {
 			if ("".equals(categoryList.get(i).getName())) {
